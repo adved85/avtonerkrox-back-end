@@ -1,0 +1,357 @@
+actonerkrox models and migrations.
+
+կարիք կա բազայում լրացուցիչ աղ. ստեղծել այն տվյալների համար, որոնք ունեն տեղային համարժեքներ
+օրինակ դռների քանակի համար կարիք ՉԿԱ բազայում պահելու 3,4,5,7
+լիտրաժի համար նույնպես կարիք չկա, կպահենք նույն հայտարարության աղ - ում:
+մխոցների քա՛նակի համար - չկա:
+մաքսազերծված է - կարիք չկա (boolen - 0/1)
+
+միգրացիաների ֆիլդերը անպայման գրանցել մոդելներում, որ սիդերները անխափան լցնեն ինֆոն:
+
+{ // Refresh the database and run all migrations and database seeders...}
+[php artisan migrate:refresh --seed]
+
+{// Create model with resource-controller and migration}
+[php artisan make:model -c -r -m]
+
+php artisan make:model BodyType -m
+
+		Schema::create('body_types', function (Blueprint $table) {
+			$table->increments('id');
+			$table->string('b_type');            
+			$table->timestamps();
+		});
+
+"b_type" - because on join, or on getting with many relation, programm can not understand 
+which "type" we want to get. And it is "index" for fast searching.
+
+------------------------------
+php artisan make:model EngineType -m
+
+		Schema::create('engine_types', function (Blueprint $table) {
+			$table->increments('id');
+			$table->string('e_type');
+			$table->timestamps();
+		});
+	
+"e_type"
+
+-------------------------------
+php artisan make:model Gerbox -m
+
+        Schema::create('gearboxes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('g_type');
+            $table->timestamps();
+        });
+		
+"g_type"
+
+-------------------------------
+php artisan make:model Drivetrain -m
+
+        Schema::create('drivetrains', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('d_type');
+            $table->timestamps();
+        });
+		
+"d_type"
+
+-------------------------------
+php artisan make:model Color -m
+
+        Schema::create('colors', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('color_name');
+            $table->timestamps();
+        });
+
+"color_name"
+
+-------------------------------
+php artisan make:model SteeringWheel -m
+
+        Schema::create('steering_wheels', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('sw_type');
+            $table->timestamps();
+        });
+		
+"sw_type"
+
+--------------------------------
+php artisan make:model Currency -m
+
+        Schema::create('currencies', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('code', 10);
+            $table->string('crc_name');
+            $table->timestamps();
+        });
+		
+"crc_name"
+
+--------------------------------
+php artisan make:model Statement -c -r -m
+
+Schema::create('statements', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned()->default(0);
+            $table->integer('status')->default(0)->comment('can be -1,0,1,2');
+
+            $table->integer('make_id')->unsigned()->default(0)->index();
+            $table->integer('model_id')->unsigned()->default(0)->index();
+            $table->integer('body_type_id')->unsigned()->default(0);
+            $table->string('year')->default('0');
+            $table->string('millage')->default('0');
+            $table->integer('engine_type_id')->unsigned()->default(0);
+            $table->string('engine_value', 5)->default('0L');
+            $table->integer('pistons')->unsigned()->default(0);
+
+            $table->integer('gearbox_id')->unsigned()->default(0);
+            $table->integer('drivetrain_id')->unsigned()->default(0);
+
+            $table->integer('steering_wheel_id')->unsigned()->default(0);
+            $table->integer('color_id')->unsigned()->default(0);
+
+            $table->integer('currency_id')->unsigned()->default(0);
+            $table->string('price')->default('000');            
+            $table->boolean('customs')->default(false);
+            $table->integer('view')->unsigned()->default(0);
+			$table->string('thumb')->default('img/no-img.png');
+            $table->text('description')->nullable();
+
+            $table->timestamps();
+        });
+		
+make_id and model_id are indexed for fast search
+"status" - 0 - added; 1-approved( show pay-button); -1 -canceled; 2 - paid (show in list on searhc)
+
+====================================
+making seeders
+
+{ how to insert many rows on seeding ???? see on link below}
+https://stackoverflow.com/questions/28594076/seed-multiple-rows-at-once-laravel-5
+
+php artisan make:seeder BodyTypeTableSeeder
+
+use App\BodyType;
+use Illuminate\Support\Facades\DB;
+
+here i want to show 2 way to seeding tables
+1) by DB::('table_name')->insert($data); which will not filling "created_at" and "updated_at"
+
+2) by cilcing on our data for filling.
+
+our data to filling
+
+1)
+public function run()
+    {
+        $body_types= [
+            ['id'=>1,'b_type'=>'sedan'],
+            ['id'=>2,'b_type'=>'hatchback'],
+            ['id'=>3,'b_type'=>'wagon'],
+            ['id'=>4,'b_type'=>'coupe'],
+
+            ['id'=>5,'b_type'=>'convertible'],
+            ['id'=>6,'b_type'=>'SUV / truck'],
+
+            ['id'=>7,'b_type'=>'pickup truck'],
+            ['id'=>8,'b_type'=>'minivan'],
+            ['id'=>9,'b_type'=>'van'],
+            ['id'=>10, 'b_type'=>'limousine']
+        ];
+        DB::table('body_types')->insert($body_types); // this style will not filling dates (created_at/updated_at)
+    }
+	
+2) second way, instead of DB::table() ...
+
+		foreach ($body_types as $key => $value) {
+            BodyType::create($value); // fill full columns
+        }
+		
+---------------------------------
+php artisan make:seeder EngineTypeTableSeeder
+
+use App\EngineType;
+
+public function run()
+    {
+        $engine_types = [
+            ['id'=>1, 'e_type'=>'gasoline'],
+            ['id'=>2, 'e_type'=>'diesel'],
+            ['id'=>3, 'e_type'=>'gas'],
+            ['id'=>4, 'e_type'=>'hybrid'],
+            ['id'=>5, 'e_type'=>'gasoline / gas'],
+            ['id'=>6, 'e_type'=>'electric'],
+
+        ];
+
+        foreach ($engine_types as $key => $value) {
+            EngineType::create($value);
+        }        
+    }
+	
+------------------------------------
+php artisan make:seeder GearboxTableSeeder
+
+use App\Gearbox;
+
+public function run()
+    {
+        $gearbox_types = [
+            ['id'=>1, 'g_type'=>'manual'],
+            ['id'=>2, 'g_type'=>'automatic'],
+            ['id'=>3, 'g_type'=>'semi-automatic'],
+            ['id'=>4, 'g_type'=>'CVT variable'],
+        ];
+
+        foreach ($gearbox_types as $key => $value) {
+            Gearbox::create($value);
+        }
+    }
+	
+	
+_--------------------------------------
+php artisan make:seeder CreateDrivetrainsTable
+
+use App\Drivetrain;
+
+ public function run()
+    {
+        $drivetrains = [
+            ['id'=>1, 'd_type'=>'rear-wheel-drive'],
+            ['id'=>1, 'd_type'=>'all-wheel-drive'],
+            ['id'=>1, 'd_type'=>'front-wheel-drive'],
+        ];
+
+        foreach ($drivetrains as $key => $value) {
+            Drivetrain::create($value);
+        }
+    }
+	
+-------------------------------------
+php artisan make:seeder ColorTableSeeder
+
+use App\Color;
+
+    public function run()
+    {
+        $colors = [
+            ['id' => 1, 'color_name'=>'white'],
+            ['id' => 2, 'color_name'=>'black'],
+            ['id' => 3, 'color_name'=>'red'],            
+            ['id' => 4, 'color_name'=>'green'],
+            ['id' => 5, 'color_name'=>'blue'],
+            ['id' => 6, 'color_name'=>'orange'],
+            
+            ['id' => 7, 'color_name'=>'brown'],
+            ['id' => 8, 'color_name'=>'purple'],
+            ['id' => 9, 'color_name'=>'grey'],
+            
+            ['id' => 10, 'color_name'=>'yellow'],            
+            ['id' => 11, 'color_name'=>'pink'],
+            ['id' => 12, 'color_name'=>'sky'],
+
+            ['id' => 13, 'color_name'=>'silver'],
+            ['id' => 14, 'color_name'=>'gold'],
+        ];
+
+        foreach ($colors as $key => $value) {
+            Color::create($value);
+        }
+    }
+	
+	
+---------------------------------------
+php artisan make:seeder SteeringWheelTableSeeder
+
+use App\SteeringWheel;
+
+public function run()
+    {
+
+        $sw_types = [
+            ['id'=>1, 'sw_type'=>'left'],
+            ['id'=>2, 'sw_type'=>'right'],
+        ];
+
+        foreach ($sw_types as $key => $value) {
+            SteeringWheel::create($value);
+        }        
+    }
+	
+-----------------------------------
+php artisan make:seeder CurrencyTableSeeder
+
+{ crc with all nessesary}
+https://gist.github.com/voskobovich/43f851859c23a8261514
+
+use App\Currency;
+
+public function run()
+    {
+        $currencies = [
+            ['id'=>1, 'crc_code'=>'AMD','crc_symbol'=>'֏', 'crc_name'=>'dram'],
+            ['id'=>1, 'crc_code'=>'USD','crc_symbol'=>'$', 'crc_name'=>'dollars'],
+            ['id'=>1, 'crc_code'=>'EUR','crc_symbol'=>'€', 'crc_name'=>'euro'],
+            ['id'=>1, 'crc_code'=>'RUB','crc_symbol'=>'руб', 'crc_name'=>'Rubles'],
+        ];
+
+        foreach ($currencies as $key => $value) {
+            Currency::create($value);
+        }
+    }
+	
+	
+-----------------------------------
+php artisan make:seeder StatementTableSeeder
+
+use App\Statement;
+
+public function run()
+    {
+        $statements = [
+            [
+                'id'=>1,
+                'user_id'=>1,
+                'status' =>0, // 0 is default and it's ok
+                'make_id'=>5, // Audi
+                'model_id'=>55, // A5
+                'body_type_id'=>4, //coupe
+                'doors'=>2,
+                'year'=>'2010',
+                'millage'=>'70000', // only km
+                'engine_type_id'=>1, // gasoline
+                'engine_value'=>'3.2', // beforesaving we add "L" letter
+                'pistons'=>6,
+                'gearbox_id'=>1, // manual
+                'drivetrain_id'=>3, // AWD
+                'steering_wheel_id'=>1, // left
+                'color_id'=>1, // white
+                'price'=>'14.000',
+                'currency_id'=>2, // dollars
+                'customs'=>false, // it's default
+                'view'=>2,
+				'thumb'=>'img/audia5.png',
+                'description'=>'no description',
+            ]
+        ];
+
+        foreach ($statements as $key => $value) {
+            Statement::create($value);
+        }
+    }
+	
+	
+
+
+
+
+
+
+
+
+

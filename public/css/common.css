@@ -1,0 +1,442 @@
+nav .nav .login_block a.log_close {
+    margin-left: -10px;
+    padding: 5px 0;
+  }
+
+nav .nav_menu {
+  margin-bottom: unset;
+}
+
+nav .nav .nav_menu li a,
+nav .nav .login_block a {
+  text-shadow: 0px 1px 1px black;
+  font-weight: 500;
+}
+
+  #loginErrorMsg {
+    color: crimson;
+    font-size: 12px;
+  }
+
+
+  .register-wrapper,
+  .reset-update-wrapper,
+  .reset-email-wrapper {
+    background: #f0f0f0;
+    margin-top: 3.8em;
+  }
+
+
+  nav .nav a.reg_open2 {
+    background: #2262a5;
+    color: #fff;
+    -webkit-transition: .5s;
+    -o-transition: .5s;
+    -moz-transition: .5s;
+    transition: .5s;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border-bottom: 2px solid #007bff;
+}
+
+nav .nav a.reg_open2:hover {
+  background-color: #007bff;
+}
+
+
+  .card-header-p {
+    margin-top: 1rem;
+  }
+  .reg-field-description {
+    font-size: 12px;
+    margin-bottom: 1em;
+  }
+
+  .reg-field-description::before {
+    content: "✓";
+    color: green;
+    margin-right: 3px;
+}
+
+form[name="register"] .form-group:not(:last-child) {
+  border-bottom: 1px solid #ece8e8;
+  padding-bottom: 1em;
+}
+
+  #get-code-btn,
+  #check-code-btn {
+    position: absolute;
+    right: 15px;
+    top: 0;
+  }
+
+  #check-code-btn {
+    width: 115px;
+  }
+
+#app .logo h1,
+nav .nav .logo h1 {
+  font-size: inherit;
+  margin-bottom: inherit;
+}
+
+#app .logo img, svg,
+nav .nav .logo img, svg {
+  vertical-align: baseline;
+}
+
+
+/*  password-update */
+form[name='pass-update'] label {
+  font-size: 14px;
+}
+
+
+
+/* home styles*/
+/* .home-wrapper {
+  margin-top: 3em;
+ 
+
+} */
+
+/* sa hima chka */
+.notify-wrapper {
+  background-image: url('../img/cars.jpg');
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  margin-top: 4em !important;
+}
+
+.notily-item {
+  display: inline-block;
+  background-color: white;
+  padding: 2px 15px;
+  border: 1px dotted #a0a0a0;
+  border-radius: 4px;
+  box-shadow: 1px 1px 5px 0px grey;
+  margin-left: 10%;
+}
+
+.notify-user-img {
+  width: 37px;
+  padding: 2px;
+  border: 1px solid #007bff;
+  border-radius: 50%;
+}
+
+.home-wrapper  .nav .login_block .log_close {
+  margin-left: 0px;
+}
+
+.home-wrapper .card {
+  background-color: rgba(215, 230, 243, 0.63);
+  background-color: rgba(255, 255, 255, 0.86);
+}
+
+.no-shadow {
+  box-shadow: none !important;
+}
+
+/* menu for all no-auth pages START */
+/* nav .nav .nav_menu {
+  justify-content: flex-end;
+} */
+nav .nav .nav_menu li {
+  margin-right: 15px;
+}
+.modal .modal_item form button.loginBtn {
+ background-color: #007bff; 
+}
+/* menu for all no-auth pages END */
+
+.home-wrapper nav .nav .nav_menu {
+  justify-content: space-evenly;
+}
+
+
+.home-wrapper nav .nav .nav_menu a.active,
+.home-wrapper nav .nav .login_block a.active {
+  color: #007bff;
+  border-bottom: 2px solid #007bff;
+}
+
+
+.home-wrapper #show_message {
+  width: 100%;
+  display: inline-block;
+  padding: 4px;
+  cursor: help;
+  text-decoration: underline;
+}
+
+.home-wrapper #message {
+  display:none;
+  border: 1px solid #80808080;
+  position: absolute;
+  width: 53%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 20px;
+  background-color: #ffe8e8d4;
+  z-index: 1;
+  border-radius: 4px;
+  text-align: justify;
+  box-shadow: 0px 5px 3px -1px #00000038;
+  font-size:14px;
+}
+
+
+
+
+.bg-my-danger {
+  background-color: #ff5e5991 !important;
+}
+.bg-my-warning {
+  background-color: #ffed4aa6 !important;
+}
+
+.bg-my-success {
+  background-color: #38c17299 !important;
+}
+
+.txt-my-danger {
+  color: #ff5e5991 !important;
+}
+.txt-my-warning {
+  color: #ffed4aa6 !important;
+}
+.txt-my-success {
+  color: #38c17299 !important;
+}
+
+/* statement wrapper */
+.back-statement-img,
+.back-statement-edit-img,
+.back-register-img,
+.back-pass-email-img,
+.back-pass-reset-img {
+  display: inherit;
+  background-image: url(../img/back/old-car-1.jpg);
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.back-statement-edit-img {
+  background-image: url(../img/back/old-car-2.jpg);
+}
+
+.back-pass-email-img {
+  background-image: url(../img/back/old-car-3.jpg);
+}
+.back-pass-reset-img {
+  background-image: url(../img/back/old-car-6.jpg);
+}
+
+.back-register-img{
+  background-image: url(../img/back/old-car-5.jpg);
+}
+
+
+.statement-wrapper,
+.settings-edit-wrapper {
+  min-height: 88vh;
+  margin-top: 3.8em !important;
+  background-color: #c1d3c654;
+}
+
+#wrap-add-statement-form {
+  transition:all cubic-bezier(0.19, 1, 0.22, 1) 0.4s;
+}
+
+
+.languages .lang img {
+  border: 1px solid grey;
+  box-sizing: content-box;
+}
+
+.toggle-group .toggle-handle {
+  background-color: white;
+}
+
+.toggle-group .toggle-off {
+  background-color: #f02020d6;
+  color: white;
+}
+.thumb-home {
+  width:120px;
+  height:90px;
+}
+.font-12 {
+  font-size: 12px;
+}
+.font-38 {
+  font-size: 32px !important;
+}
+
+.edit-btn {
+  border: 1px solid transparent !important;
+  border-radius: .25rem !important;  
+}
+
+
+
+.search-results-section{
+  justify-content: space-around;
+  -webkit-justify-content:space-around;
+}
+.search-btn {
+  background: #2262a5;
+  color: white;
+  font-weight: 600;
+}
+.search-no-result{
+  background: #f0f0f0;
+  width: 100%;
+  padding: 3rem;
+  text-align: center;
+  font-weight: 500;
+  color: #d11919bf;
+  
+}
+
+.pagination-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+
+.pagination .page-item {
+  color: black;
+  float: left;
+  /* padding: 8px 16px; */
+  margin-right: 2px;
+  font-family: inherit;
+  text-decoration: none;
+  border:1px solid #cbcbcb;
+  border-radius: 1px;
+  transition: background-color .3s;
+}
+
+.pagination .page-item a,
+.pagination .page-item span {
+  display: inline-block;
+  text-decoration: none;
+  padding: 8px 16px;
+
+}
+
+.pagination .page-item.active {
+  background-color: #2262a5;
+  color: white;  
+}
+
+.pagination .page-item.disabled{
+  background-color: #ddd;
+}
+
+.pagination .page-item:hover:not(.active) {
+  background-color: #ddd;
+}
+
+
+/* footer */
+footer .footer .footer_bottom {
+  justify-content: center;
+}
+
+footer .footer {
+  font-family: Nunito;
+}
+
+footer .footer .footerItem .footer_social {
+  margin: 0%;
+}
+
+footer .footer-makers{
+  display: flex;
+  flex-direction: row;
+  max-width: 440px;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.footer-make-item {
+  text-decoration: none;
+  margin-top: 0.6rem;
+}
+.footer-make-item img {
+    color: white;
+    background-color: #dad1ce;
+    border-radius: 4px;
+    width: 90px;
+    height: 70px;
+    
+}
+
+footer .footer .footerItem h4 {
+  color: #9a9a9a;
+  margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+.category-item {
+  background-color: #ecececc7;
+}
+
+main {
+  background-image: url('/img/back/papyrus.png')
+}
+
+main .main_filter {
+  background-color: transparent;
+}
+
+main .main_filter .main_filter_items .main_filter_categories .categories_item {
+  background-color: #eeeeeee6;
+}
+
+.search-results-section .car_section_item .details {
+  font-size: 12px;
+  font-weight: 600;
+  color: dimgray;
+  padding: 3px 5px;
+  min-height: 55px;
+}
+
+.car_section_item_pover {
+  padding: 0 15px;
+  background-color: #fefefe80;
+}
+
+main .item_section {
+  padding: 30px 0;
+  margin: 0;
+}
+
+#edit-settings-card {
+  background-image: url('/img/back/old-car-7.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+.slider_content {
+  display: none;
+}
+
+.languages {
+display: none;
+}
+
